@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+@layer utilities {
+    .animate-gradient-x {
+      animation: gradient-x 15s ease infinite;
+    }
+    .animate-gradient-y {
+      animation: gradient-y 15s ease infinite;
+    }
+    .animate-gradient-xy {
+      animation: gradient-xy 15s ease infinite;
+    }
+    .animate-gradient-circle {
+        animation: gradient-circle 10s ease infinite;
+        background-size: 200% 200%;
+      }
+  }
