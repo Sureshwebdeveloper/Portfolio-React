@@ -7,7 +7,7 @@ const AuthContext = (props) => {
   const [loading, setLoading] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
   const [token, setToken] = useState("");
-  const url = "http://localhost:8000";
+  const url = "https://suresh-portfolio-server.onrender.com";
   const contextValue = {
     loading,
     setLoading,
