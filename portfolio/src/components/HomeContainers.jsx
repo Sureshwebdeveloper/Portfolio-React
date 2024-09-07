@@ -1,6 +1,7 @@
 import React from "react";
 import profile from "../assets/profile_transparent.png";
 import { Element, Link } from "react-scroll";
+import resume from "../../public/FullStack_Developer_Suresh-Resume.pdf"
 const HomeContainers = () => {
   return (
     <Element name="/">
@@ -14,10 +15,11 @@ const HomeContainers = () => {
                 Contact
               </button>
             </Link>
-
+            <a href={resume} download="Suresh_Resume.pdf">
             <button className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600">
               My Resume
             </button>
+            </a>
           </div>
         </div>
         <div className="mt-6 md:mt-0 md:w-1/2 flex justify-center">
