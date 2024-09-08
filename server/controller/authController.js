@@ -87,15 +87,14 @@ const sendEmail = async (req, res) => {
   const { name, email, message } = req.body;
   try {
     if (!name || !email || !message) {
-      res
-        .status(404)
-        .json({
-          success: false,
-          message: "Please Fill All Fields To Send Email",
-        });
+      res.status(404).json({
+        success: false,
+        message: "Please Fill All Fields To Send Email",
+      });
     }
 
-   await sendMail(name, email, message);
+    await sendMail(name, email, message);
+
     return res
       .status(200)
       .json({ success: true, message: "Email sent successfully" });

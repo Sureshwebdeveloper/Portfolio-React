@@ -14,10 +14,11 @@ const transporter = nodemailer.createTransport({
 const sendMail = async (name, email, message) => {
   try {
     var mailOptions = {
-      from: email, // Sender's email address
+      from: process.env.NODE_MAILER_USER, // Sender's email address
       to: "developersuresh07@gmail.com", // Your email address
+      replyTo: email,
       subject: `New message from ${name}`,
-      text: message,
+      text: `${message} and Message From ${email}`,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {

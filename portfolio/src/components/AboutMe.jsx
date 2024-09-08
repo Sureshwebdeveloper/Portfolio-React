@@ -19,7 +19,7 @@ const AboutMe = () => {
 
   return (
     <Element name="/about">
-      <div className="mx-auto p-6 bg-gradient-to-r from-blue-200 to-purple-600  flex flex-col md:flex-row items-center">
+      <div className="mx-auto font-Lora p-6 bg-gradient-to-r from-blue-200 to-purple-600  flex flex-col md:flex-row items-center">
         <div className="md:w-1/3 flex justify-center">
         <img
             src={profile}
@@ -29,7 +29,7 @@ const AboutMe = () => {
         </div>
         <div className="md:w-2/3 mt-6 md:mt-0 md:ml-6 text-center md:text-left">
           <h2 className="text-3xl font-bold mb-4">About Me</h2>
-          <p className="text-lg mb-4">
+          <p className="text-lg mb-4 font-bold">
             I am a Full Stack Developer. I am open to work and willing to take on
             new challenges. I have hands-on experience in various technologies.
           </p>

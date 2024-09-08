@@ -57,12 +57,12 @@ const Navbar = () => {
 
 
   return (
-    <header className="w-full bg-transparent fixed top-0 left-0 right-0 transition-all ease-in duration-300 z-20">
+    <header className="w-full bg-transparent font-Montserrat fixed top-0 left-0 right-0 transition-all ease-in duration-300 z-20">
       <nav
-        className={`py-4 lg:24 px-4 ${
+        className={`py-4 lg:24 px-4  ${
           sticky
             ? "sticky top-0 left-0 right-0 drop-shadow-md bg-[#ffffff] z-0"
-            : ""
+            : "bg-[#00000016]"
         }`}
       >
         <div className="flex justify-around items-center gap-8">

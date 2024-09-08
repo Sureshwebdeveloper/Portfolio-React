@@ -29,17 +29,16 @@ const Contact = () => {
       const response = await axios.post(`${url}/auth/send-email`, {
         name: formData.name,
         email: formData.email,
-        message: formData.email,
+        message: formData.message,
       });
 
       console.log(response);
 
       if (response.data.success) {
-        setLoading(false)
+        setLoading(false);
         toast.success(response.data.message);
-        setFormData({name : "", email:"",message:""})
+        setFormData({ name: "", email: "", message: "" });
       }
-
     } catch (error) {
       console.log(error);
       toast.error("Error");
@@ -51,15 +50,11 @@ const Contact = () => {
   return (
     <Element name="/contact">
       <div
-        className=" bg-cover bg-center"
-        style={{
-          backgroundImage: "url('https://source.unsplash.com/random/1600x900')",
-        }}
       >
-        <div className="mx-auto p-6 bg-gradient-to-r from-teal-400 to-blue-500 text-gray-900  flex flex-col md:flex-row items-center">
+        <div className="mx-auto font-Open-sans p-6 bg-gradient-to-r from-teal-400 to-blue-500 text-gray-900  flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 p-6">
             <h2 className="text-4xl font-bold mb-4 ">Let's Talk</h2>
-            <p className="text-lg mb-4 ">
+            <p className="text-lg mb-4 font-bold">
               I am currently available to take on new projects. Feel free to
               reach out to me!
             </p>

@@ -42,15 +42,15 @@ const Projects = () => {
 
   return (
     <Element name="/projects">
-      {loading ? <Loader/> :
-        <div className="mx-auto p-6 bg-gradient-to-r from-pink-500 to-red-600">
-          <h2 className="text-3xl font-bold mb-6 text-center text-white">My Projects</h2>
+      <div className="mx-auto font-Open-sans p-6 bg-gradient-to-r from-pink-500 to-red-600">
+        <h2 className="text-3xl font-bold mb-6 text-center text-white">My Projects</h2>
+      {loading ? <Loader/> : <>
           <div className="flex justify-center mb-6">
             <button
               className={`px-4 py-2 m-2 rounded-full ${
                 selectedCategory === "All"
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200 text-gray-700"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-200 text-gray-700"
               } hover:bg-blue-700 transition duration-300`}
               onClick={() => setSelectedCategory("All")}
             >
@@ -58,9 +58,9 @@ const Projects = () => {
             </button>
             {categories.map((category) => (
               <button
-                key={category}
-                className={`px-4 py-2 m-2 rounded-full ${
-                  selectedCategory === category
+              key={category}
+              className={`px-4 py-2 m-2 rounded-full ${
+                selectedCategory === category
                     ? "bg-blue-500 text-white"
                     : "bg-gray-200 text-gray-700"
                 } hover:bg-blue-700 transition duration-300`}
@@ -84,7 +84,7 @@ const Projects = () => {
                 />
                 <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                 <p className="text-gray-600 mb-4">{project.description}</p>
-                <p className="text-gray-600 mb-4">{project.category}</p>
+                <p className="text-gray-600 mb-4 font-bold">{project.category}</p>
                 <div className="flex justify-center space-x-4">
                   <a
                     href={project.github_url}
@@ -106,8 +106,9 @@ const Projects = () => {
               </div>
             ))}
           </div>
-        </div>
+          </>
       }
+      </div>
     </Element>
   );
 };

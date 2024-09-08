@@ -49,16 +49,16 @@ const Certificates = () => {
       title: "Full Stack Basic",
       organization: "Great Learning",
       image: "mern-img.png",
-      url: "sgirogi",
-      style: "w-[130px] h-[110px]",
+      url: "https://www.mygreatlearning.com/certificate/JGFWWQNH",
+      style: "w-[130px] h-[110px] object-contain scale-125",
     },
     {
       id: 7,
       title: "Authentication Mern",
       organization: "Guvi",
       image: "mern-img.png",
-      url: "sgirogi",
-      style: "size-[130px] h-[110px]",
+      url: "https://www.guvi.in/verify-certificate?id=479Ea167P521guNy2Z",
+      style: "size-[130px] h-[110px] object-contain scale-125",
     },
   ];
 
