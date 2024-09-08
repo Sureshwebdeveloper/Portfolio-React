@@ -20,7 +20,7 @@ const Contact = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const url = "http://localhost:8000";
+  const url = "https://suresh-portfolio-server.onrender.com";
 
   const handleSubmit = async (e) => {
     e.preventDefault();

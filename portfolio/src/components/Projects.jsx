@@ -12,7 +12,7 @@ const Projects = () => {
   const [loading, setLoading] = useState(false);
   console.log(selectedCategory);
 
-  let url = "http://localhost:8000";
+  let url = "https://suresh-portfolio-server.onrender.com";
 
   const fetchData = async () => {
     try {
