@@ -1,6 +1,6 @@
 import express from "express";
 import multer from "multer";
-import {deleteProject, filterCategory, projectUpload,removeProject, updateProject} from "../controller/projectController.js";
+import {deleteProject, filterCategory, projectUpload, updateProject} from "../controller/projectController.js";
 const adminRouter = express.Router();
 
 const storage = multer.diskStorage({

@@ -129,4 +129,4 @@ const updateProject = async (req, res) => {
 };
 
 
-export { projectUpload, removeProject, filterCategory,deleteProject ,updateProject};
+export { projectUpload, filterCategory,deleteProject ,updateProject};
