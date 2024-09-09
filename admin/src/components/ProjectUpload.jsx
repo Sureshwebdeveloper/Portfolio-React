@@ -9,7 +9,7 @@ const ProjectUpload = () => {
     category: "",
     github_url: "",
     deployment_url: "",
-    image: null,
+    image: "",
   });
 
   const [message, setMessage] = useState("");
