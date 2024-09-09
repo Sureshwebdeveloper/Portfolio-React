@@ -17,7 +17,7 @@ adminRouter.post("/add", upload.single("image"), projectUpload);
 // getting items by category wise default all
 adminRouter.get("/filter/:category",filterCategory);
 // delete
-adminRouter.delete("/projects/:id",deleteProject);
+adminRouter.post("/projects",deleteProject);
 // Update
 adminRouter.put("/projects/:id",updateProject);
 

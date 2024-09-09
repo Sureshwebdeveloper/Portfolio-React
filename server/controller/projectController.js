@@ -57,11 +57,9 @@ const filterCategory = async (req, res) => {
 };
 
 const deleteProject = async (req,res) => {
-    const { id } = req.params;
-  
     try {
-      const project = await projectModel.findByIdAndDelete(id);
-  
+      const project = await projectModel.findById(req.body.id);
+      
       if (!project) {
         return res.status(404).json({
           success: false,
@@ -70,12 +68,13 @@ const deleteProject = async (req,res) => {
       }
   
       // Delete the image file from the server
-      const imagePath = path.join(__dirname, 'uploads', project.image);
-      fs.unlink(imagePath, (err) => {
+       fs.unlink(`uploads/${project.image}`, (err) => {
         if (err) {
           console.log(err);
         }
       });
+
+      await projectModel.findByIdAndDelete(req.body.id);
   
       return res.status(200).json({
         success: true,

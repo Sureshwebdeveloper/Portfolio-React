@@ -3,20 +3,24 @@ import { useContext, useEffect } from 'react';
 import { StoreContext } from '../context/AuthContext';
 import Loader from "../components/Loaders.jsx";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const ManageProject = () => {
-  const {url,data,setData,fetchProjects,loading,setLoading} = useContext(StoreContext);
-  const navigate = useNavigate()
-  const handleDelete = async (id) => {
-    console.log(id);
+  const {url,data,fetchProjects,loading,setLoading} = useContext(StoreContext);
+  const navigate = useNavigate();
+
+  const handleDelete = async (projectId) => {
+    setLoading(true);
+    const response = await axios.post(`${url}/api/project/projects`,{id:projectId});
+    console.log(response);
 
     try {
-      setLoading(true);
-      const response = await axios.delete(`${url}/api/project/projects/${id}`);
         if (response.data.success) {
-          setData(projects.filter(project => project._id !== id));
+          toast.success(response.data.message);
+          setLoading(false)
         }
-    } catch (error) {
+      } catch (error) {
+      setLoading(false)
       console.error(error);
     }
   };
@@ -26,8 +30,7 @@ const ManageProject = () => {
   }
 
   useEffect(() => {
-    
-    fetchProjects()
+    fetchProjects();
   },[]);
 
   return (
