@@ -53,7 +53,7 @@ const ProjectUpload = () => {
           github_url:"",
           deployment_url:"",
           category:"",
-          image:null
+          image:""
         }
         );
         // Handle successful upload, e.g., clear form, show success message, etc.
