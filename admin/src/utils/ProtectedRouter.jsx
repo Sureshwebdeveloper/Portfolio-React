@@ -1,21 +1,26 @@
 import { useEffect, useContext } from "react";
-import { useNavigate, Outlet } from "react-router-dom";
-import { StoreContext } from "./StoreContext";
+import { useNavigate, Outlet, Navigate } from "react-router-dom";
+import { StoreContext } from "../context/AuthContext.jsx";
 
 const ProtectedRouter = () => {
-  const { authenticated,token } = useContext(StoreContext);
+  const { token, setToken } = useContext(StoreContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const localStoragetoken = localStorage.getItem("token");
-
-    if (!token || localStoragetoken === "undefined" || token.length < 10 ||  authenticated(false)) {
-      localStorage.removeItem("token");
-      navigate("/");
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
     }
-  }, [authenticated, navigate]);
 
-  return <>{localStorage.getItem("token") ? <Outlet /> : null}</>;
+    if (!token || token === "undefined" || token === undefined) {
+      localStorage.removeItem("token");
+      navigate("/login");
+      toast.error("Un Authorized Login Again");
+    }
+  }, [token, navigate]);
+
+  return (
+    <>{localStorage.getItem("token") ? <Outlet /> : <Navigate to="/login" />}</>
+  );
 };
 
 export default ProtectedRouter;

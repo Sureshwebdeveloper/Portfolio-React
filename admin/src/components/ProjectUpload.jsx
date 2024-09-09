@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 const ProjectUpload = () => {
   const [formData, setFormData] = useState({
     title: "",
-    category: "Static",
+    category: "",
     github_url: "",
     deployment_url: "",
     image: null,
@@ -66,6 +66,8 @@ const ProjectUpload = () => {
     }
   };
 
+
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
@@ -104,6 +106,7 @@ const ProjectUpload = () => {
               required
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
             >
+              <option>Select Category</option>
               <option value="Static">Static</option>
               <option value="Front End">Front End</option>
               <option value="Full Stack">Full Stack</option>

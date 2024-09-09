@@ -1,6 +1,6 @@
 import projectModel from "../models/ProjectModel.js";
 import fs from "fs";
-
+import path from "path"
 const projectUpload = async (req, res) => {
   const { title, category, github_url, deployment_url } = req.body;
   try {
@@ -20,38 +20,6 @@ const projectUpload = async (req, res) => {
       success: true,
       message: "Project Deatile Save Successfully",
       data: response,
-    });
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
-    });
-  }
-};
-
-const removeProject = async (req, res) => {
-  const { id } = req.body;
-
-  try {
-    const response = await projectModel.findById(id);
-
-    if (!response) {
-      res.status(400).json({ success: false, message: "No Id Matached" });
-    }
-
-    fs.unlink(`uploads/${response.image}`, (err) => {
-      if (err) {
-        console.error("Error deleting image:", err);
-      }
-    });
-    console.log(`uploads/${response.image}`);
-
-    await projectModel.findByIdAndDelete(id);
-
-    return res.status(200).json({
-      success: true,
-      message: "Item Deleted Successfully",
     });
   } catch (error) {
     console.log(error);
@@ -88,4 +56,77 @@ const filterCategory = async (req, res) => {
   } catch (error) {}
 };
 
-export { projectUpload, removeProject, filterCategory };
+const deleteProject = async (req,res) => {
+    const { id } = req.params;
+  
+    try {
+      const project = await projectModel.findByIdAndDelete(id);
+  
+      if (!project) {
+        return res.status(404).json({
+          success: false,
+          message: "Project not found",
+        });
+      }
+  
+      // Delete the image file from the server
+      const imagePath = path.join(__dirname, 'uploads', project.image);
+      fs.unlink(imagePath, (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+  
+      return res.status(200).json({
+        success: true,
+        message: "Project deleted successfully",
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal Server Error",
+      });
+    }
+};
+
+const updateProject = async (req, res) => {
+  const { id } = req.params; 
+  const { title, category, github_url, deployment_url } = req.body;
+
+  try {
+    const updateData = {};
+    if (title) updateData.title = title;
+    if (category) updateData.category = category;
+    if (github_url) updateData.github_url = github_url;
+    if (deployment_url) updateData.deployment_url = deployment_url;
+
+  const updatedProject = await projectModel.findByIdAndUpdate(
+      id,
+      { $set: updateData },
+      { new: true } // This option returns the updated document
+    );
+
+    if (!updatedProject) {
+      return res.status(404).json({
+        success: false,
+        message: "Project not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Project updated successfully",
+      data: updatedProject,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
+};
+
+
+export { projectUpload, removeProject, filterCategory,deleteProject ,updateProject};

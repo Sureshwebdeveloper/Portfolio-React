@@ -20,16 +20,13 @@ const Navbar = () => {
             {isOpen ? <FaTimes /> : <FaBars />}
           </button>
         </div>
-        <div className={`md:flex ${isOpen ? "block" : "hidden"} w-full md:w-auto`}>
+        <div className={`md:flex ${isOpen ? "block absolute md:flex md:relative md:inset-0 top-16 left-0 text-center bg-slate-400 md:bg-inherit w-full " : " hidden"} w-full md:w-auto`}>
           <ul className="md:flex md:space-x-6 text-white">
             <li className="my-2 md:my-0">
               <Link to="/" className="block px-2 py-1 hover:bg-gray-700 rounded">Home</Link>
             </li>
             <li className="my-2 md:my-0">
-              <Link to="/upload" className="block px-2 py-1 hover:bg-gray-700 rounded">Upload Project</Link>
-            </li>
-            <li className="my-2 md:my-0">
-              <Link to="/remove" className="block px-2 py-1 hover:bg-gray-700 rounded">Remove Project</Link>
+              <Link to="/manage" className="block px-2 py-1 hover:bg-gray-700 rounded">Manage Project</Link>
             </li>
           </ul>
         </div>

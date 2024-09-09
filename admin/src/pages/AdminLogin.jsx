@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const AdminLogin = () => {
-  const { token, setToken, setAuthenticated } = useContext(StoreContext);
+  const { token, setToken,  url } = useContext(StoreContext);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -16,7 +16,6 @@ const AdminLogin = () => {
 
   const [message, setMessage] = useState("");
 
-  const url = "http://localhost:8000/";
   const navigate = useNavigate("");
 
   const handleChange = (e) => {
@@ -27,7 +26,7 @@ const AdminLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await axios.post("http://localhost:8000/auth/login", {
+    const response = await axios.post(`${url}/auth/login`, {
       email: formData.email,
       password: formData.password,
     });
@@ -36,7 +35,6 @@ const AdminLogin = () => {
       if (response.data.success) {
         setToken(response.data.token);
         localStorage.setItem("token", response.data.token);
-        setAuthenticated(true);
         navigate("/");
         setMessage(response.data.message);
         toast.success(response.data.message);
@@ -52,7 +50,7 @@ const AdminLogin = () => {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      localStorage.setItem("token", token);
+      setToken(localStorage.getItem("token"));
     }
   }, [token]);
 
