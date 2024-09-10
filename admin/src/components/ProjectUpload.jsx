@@ -58,7 +58,7 @@ const ProjectUpload = () => {
           category: "",
         });
         setImage(false);
-        // Handle successful upload, e.g., clear form, show success message, etc.
+    
       }
     } catch (error) {
       setLoading(false)
