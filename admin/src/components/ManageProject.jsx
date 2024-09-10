@@ -17,7 +17,8 @@ const ManageProject = () => {
     try {
         if (response.data.success) {
           toast.success(response.data.message);
-          setLoading(false)
+          fetchProjects();
+          setLoading(false);
         }
       } catch (error) {
       setLoading(false)

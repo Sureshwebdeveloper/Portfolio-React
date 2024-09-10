@@ -6,8 +6,6 @@ const Navbar = () => {
   const [active, setActive] = useState("Home");
   const [hidden, setHidden] = useState(false);
 
-  console.log(active);
-
   const handleScroll = () => {
      if(window.scrollY > 30){
       setSticky(true)
@@ -21,7 +19,6 @@ const Navbar = () => {
   const handleMenu = (link) => {    
     setActive(link)
     setHidden(!hidden)
-
   }
 
   useEffect(() => {
@@ -34,7 +31,7 @@ const Navbar = () => {
       path: "/",
     },
     {
-      link: "About Me",
+      link: "About",
       path: "/about",
       offset: -90,
     },
@@ -65,7 +62,7 @@ const Navbar = () => {
             : "bg-[#00000016]"
         }`}
       >
-        <div className="flex justify-around items-center gap-8">
+        <div className="flex justify-between md:justify-around items-center gap-8">
           <Link
             to={"/"}
             className="text-2xl font-bold text-orange-500 items-center gap-2"
@@ -76,12 +73,12 @@ const Navbar = () => {
 
           {!hidden ? (
             <RiMenu3Fill
-              className="absolute right-6 md:hidden text-xl font-bold"
+              className="absolute right-6 md:hidden text-xl font-bold cursor-pointer"
               onClick={() => setHidden(true)}
             />
           ) : (
             <RiCloseFill
-              className="absolute right-6 md:hidden text-xl font-bold text-white z-10"
+              className="absolute right-6 md:hidden text-xl font-bold text-white z-10 cursor-pointer"
               onClick={() => setHidden(false)}
             />
           )}
@@ -91,7 +88,7 @@ const Navbar = () => {
             <ul
               className={` ${
                 hidden ? "block" : "hidden"
-              } bg-[#000000] h-screen md:hidden absolute right-0 w-[40%] pt-16 text-center top-0 space-y-4`}
+              } bg-[#000000] h-screen md:hidden absolute right-0 w-[50%] pt-16 text-center top-0 space-y-4`}
             >
               {navItems.map(({ link, path, offset }) => {
                 return (

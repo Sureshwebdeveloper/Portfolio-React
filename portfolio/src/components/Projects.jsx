@@ -10,7 +10,6 @@ const Projects = () => {
   const [data, setData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [loading, setLoading] = useState(false);
-  console.log(selectedCategory);
 
   let url = "https://suresh-portfolio-server.onrender.com";
 
@@ -21,12 +20,11 @@ const Projects = () => {
         (url += `/api/project/filter/${selectedCategory}`)
       );
 
-      console.log(response);
+
 
       if (response.data.success) {
         setLoading(false);
         setData(response.data.data);
-        console.log(data);
       }
     } catch (error) {
       setLoading(true);

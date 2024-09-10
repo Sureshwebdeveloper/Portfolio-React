@@ -7,7 +7,7 @@ const HomeContainers = () => {
   return (
     <Element name="/">
       <div className="flex  flex-col-reverse  md:flex-row items-center justify-between p-6 bg-[#ECFDF5] min-h-screen bg-gradient-to-r from-blue-400 via-purple-500 to-red-500 animate-gradient-x font-Oswald">
-        <div className="text-center pt-20 md:pt-0 md:w-1/2 font-mono">
+        <div className="text-center pt-20 md:pt-0 md:w-1/2 font-Open-sans">
           <h1 className="text-4xl font-bold mb-4">Hey, I'm Suresh</h1>
           <h2 className="text-3xl text-center font-semibold text-white mb-6">
             Full Stack Developer

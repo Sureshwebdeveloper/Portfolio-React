@@ -4,7 +4,8 @@ import path from "path"
 const projectUpload = async (req, res) => {
   const { title, category, github_url, deployment_url } = req.body;
   try {
-    let image_filename = `${req.file.filename}`;
+    let image_filename = req.file.filename;
+    console.log("Uploaded image filename:", image_filename); 
 
     const response = await new projectModel({
       title,
@@ -18,7 +19,7 @@ const projectUpload = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: "Project Deatile Save Successfully",
+      message: "Project Details Saved Successfully",
       data: response,
     });
   } catch (error) {

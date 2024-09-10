@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { StoreContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
+import { MdCloudUpload } from "react-icons/md";
 
 const ProjectUpload = () => {
   const [formData, setFormData] = useState({
@@ -9,12 +10,13 @@ const ProjectUpload = () => {
     category: "",
     github_url: "",
     deployment_url: "",
-    image: "",
   });
+
+  const [image, setImage] = useState(false);
 
   const [message, setMessage] = useState("");
 
-  const { url } = useContext(StoreContext);
+  const { url,loading,setLoading } = useContext(StoreContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,7 +24,7 @@ const ProjectUpload = () => {
   };
 
   const handleFileChange = (e) => {
-    setFormData({ ...formData, image: e.target.files[0] });
+    setImage(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
@@ -32,8 +34,8 @@ const ProjectUpload = () => {
     formDataToSend.append("category", formData.category);
     formDataToSend.append("github_url", formData.github_url);
     formDataToSend.append("deployment_url", formData.deployment_url);
-    formDataToSend.append("image", formData.image);
-
+    formDataToSend.append("image", image);
+    setLoading(true);
     try {
       const response = await axios.post(
         `${url}/api/project/add`,
@@ -45,28 +47,27 @@ const ProjectUpload = () => {
         }
       );
       if (response.data.success) {
+        setLoading(false);
         setMessage(response.data.message);
         toast.success(response.data.message);
         setFormData({
-          title:"",
-          image:"",
-          github_url:"",
-          deployment_url:"",
-          category:"",
-          image:null
-        }
-        );
+          title: "",
+          image: "",
+          github_url: "",
+          deployment_url: "",
+          category: "",
+        });
+        setImage(false);
         // Handle successful upload, e.g., clear form, show success message, etc.
       }
     } catch (error) {
+      setLoading(false)
       console.error("Error uploading project:", error);
       if (error) {
         setMessage(error.message);
       }
     }
   };
-
-
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -146,19 +147,29 @@ const ProjectUpload = () => {
               required
             />
           </div>
-          <div>
+          <div className="flex flex-col">
+            <p className=" text-lg font-medium text-gray-700">Upload Image</p>
             <label
               htmlFor="image"
-              className="block text-lg font-medium text-gray-700"
+              className="block text-lg font-medium text-gray-700 w-[90px]  bg-slate-200 border-dashed rounded-lg"
             >
-              Project Image
+              {image ? (
+                <img
+                  src={URL.createObjectURL(image)}
+                  alt=""
+                  className="border-2 max-w-[300px] h-[70px] object-center"
+                />
+              ) : (
+                <MdCloudUpload className=" mx-auto size-14 cursor-pointer" />
+              )}
             </label>
             <input
               type="file"
               id="image"
               name="image"
               onChange={handleFileChange}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              // className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              hidden
               required
             />
           </div>
@@ -167,7 +178,7 @@ const ProjectUpload = () => {
               type="submit"
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300"
             >
-              Upload Project
+             {loading ? "Loading...." : "Upload Project"}
             </button>
           </div>
         </form>
